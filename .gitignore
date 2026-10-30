@@ -1,0 +1,47 @@
+# build trees
+/build/
+/build*/
+/out/
+/.vs/
+*.user
+
+# Ghidra project (tools/ghidra/run_full.sh recreates it) and its bulk export
+/ghidra/
+/analysis/ghidra/
+/analysis/ghidra_run*.out
+
+# reference binaries: game files, never committed (orig/README.md lists what to copy)
+/orig/*
+!/orig/README.md
+
+# build outputs anywhere (no binary is ever published)
+*.dll
+*.exe
+*.pdb
+*.obj
+*.lib
+*.exp
+*.ilk
+*.idb
+*.ipch
+*.map
+
+# game content (the client's packages): never committed
+*.u
+*.utx
+*.ukx
+*.usx
+*.uax
+*.unr
+*.dat
+# UnrealScript text of the client packages (tools/ue2_pkg.py --uc recreates it)
+/analysis/engine/uc/
+/analysis/engine/layouts.tsv
+/analysis/engine/decomp/
+
+# python
+__pycache__/
+*.pyc
+
+# local logs
+*.log

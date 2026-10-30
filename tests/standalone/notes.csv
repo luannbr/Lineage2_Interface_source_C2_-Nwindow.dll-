@@ -1,0 +1,8 @@
+# Differences tools/verify_standalone.py reports that are not bugs: check,key,explanation
+check,key,explanation
+source,NCTestHtmlViewer:super,"The stock DECLARE_CLASS named NCWnd as the super while the C++ base is NCNPCHtmlViewer (the stock Super:: is NCWnd); our header keeps the C++ base. The generated IMPLEMENT_CLASS takes the super from analysis/classes.json (docs/notas/Standalone.md, section 3)."
+source,NCTradeItemWnd:super,"The stock DECLARE_CLASS named NCWnd as the super while the C++ base is NCItemWnd; same case as NCTestHtmlViewer."
+source,NCCmdTarget:vtable,"The stock NCCmdTarget vtable has 37 slots; ours declares 24 and NCWnd declares slots 24..36 (src/nwindow/NCWnd.cpp). NW_CHECK_VTABLE compares the 24 that exist."
+vtables,NCCmdTarget:count,"Our NCCmdTarget declares 24 virtuals, the stock 37 (slots 24..36 are declared in NCWnd here). NCCmdTarget is abstract and only NCWnd derives from it: its vtable is live only inside NCCmdTarget's constructor and destructor, which call no slot above 23."
+imports,core.dll!GIsSSE,"The stock image emitted appMemcpy out of line (0x10001790) with an SSE branch on Core's GIsSSE; the standalone build has the C runtime's memcpy. Nothing else of the game code reads it."
+imports,core.dll!??_7FExec@@6B@,"Only the stock NL2Font constructor (0x1005b7a0) stores the intermediate FExec vtable (Core's) before its own; ours does not store it (docs/notas/Standalone.md, section 10)."
